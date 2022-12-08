@@ -32,3 +32,55 @@ function insertuser(Request $req){
  return redirect('login');
 }
 
+Register.blade.php
+
+<div>
+ <form action="{{ URL :: to('insertuser') }}" method="POST">
+ @csrf 
+ <center><br>
+ <h1>Register </h1><hr>
+ <table border="2">
+ <tr>
+ <td>Full Name </td>
+ <td><input type="text" name="txtname" /></td>
+ </tr>
+ <tr>
+ <td>Email </td>
+ <td><input type="text" name="txtemail" /></td>
+ </tr>
+ <tr>
+ <td>Phone No. </td>
+ <td><input type="number" name="txtphno" /></td>
+ </tr>
+ <tr>
+ <td>Username </td>
+ <td><input type="text" name="txtuname" /></td>
+ </tr>
+ <tr>
+ <td>Password </td>
+ <td><input type="password" name="txtpwd" /></td>
+ </tr>
+ <tr>
+ <td colspan="2"><center><input type="submit" value="Register" />
+</center></td>
+ </tr>
+ </table>
+ </center>
+ </form>
+ @if($errors) 
+ @foreach($errors->all() as $e) 
+ <center><hr><li style="color:red">{{$e}}</li><hr></center>
+ @endforeach 
+ @endif 
+</div>
+
+
+Route::get('/', function () { 
+ return view('login'); 
+}); 
+Route::get('/login', function () { 
+ return view('login'); 
+}); 
+Route::get('/register', function () { 
+ return view('register'); 
+});
