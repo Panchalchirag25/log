@@ -1,0 +1,50 @@
+Login.blade.php
+
+@php 
+ if(session()) 
+ session_unset() 
+@endphp 
+<div>
+ <form action="{{ URL :: to('loginuser') }}" method="POST">
+ @csrf 
+ <center><br>
+ <h1>Login </hr><hr>
+ <table border="2">
+ <tr>
+ <td>Username </td>
+ <td><input type="text" name="txtuname" required/></td>
+ </tr>
+ <tr>
+ <td>Password </td>
+ <td><input type="password" name="txtpwd" required/></td>
+ </tr>
+ <tr>
+ <td colspan="2"><center><input type="submit" value="Login" />
+</center></td>
+ </tr>
+ </table>
+ </center>
+ </form>
+</div>
+
+
+function loginuser(Request $req){ 
+ if(strcmp($req->txtuname,"admin")==0 && strcmp($req->txtpwd,"admin")==0 ){ 
+ return redirect('ahome'); 
+ }else{ 
+ $result = DB::table('shopusers') 
+ ->where('username',$req->txtuname) 
+ ->where('password',$req->txtpwd) 
+ ->get(); 
+ 
+ if($result-> isNotEmpty()){ 
+ echo "<script>alert('hii')</script>"; 
+ return redirect('chome'); 
+ }else{ 
+ //echo "<script>alert('Username or Password incorrect')</script>";
+ return redirect('login'); 
+ } 
+ } 
+ }
+
+
