@@ -1,0 +1,34 @@
+Insert_Controller.php
+
+
+function insertuser(Request $req){ 
+ $req->validate([ 
+ 'txtname'=>'required', 
+ 'txtemail'=>'required', 
+ 'txtphno'=>'required|integer', 
+ 'txtuname'=>'required', 
+ 'txtpwd'=>'required'
+ ], 
+ $messages=[ 
+ 'txtname.required'=>'Please Enter Name', 
+ 'txtemail.required'=>'Please Enter Email', 
+ 'txtphno.required'=>'Please Enter Phone No', 
+ 'txtphno.integer'=>'Phone Must be Number', 
+ 'txtuname.required'=>'Please Enter Username', 
+ 'txtpwd.required'=>'Password cannot be empty'
+ ]); 
+ $uname=$req->txtuname; 
+ $name = $req->txtname; 
+ $email = $req->txtemail; 
+ $phno = $req->txtphno; 
+ $passwd = $req->txtpwd; 
+ DB::table('shopusers')->insert([ 
+ 'username' => $uname, 
+ 'name' => $name, 
+ 'email' => $email, 
+ 'phno' => $phno, 
+ 'password' => $passwd 
+ ]); 
+ return redirect('login');
+}
+
