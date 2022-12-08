@@ -48,3 +48,8 @@ function loginuser(Request $req){
  }
 
 
+Route::get('/', function () { 
+
+ return view('login'); 
+
+})
